@@ -1,37 +1,55 @@
 <?php
 
-error_reporting( E_ALL );
-ini_set( 'display_errors', 1 );
+/* Save the current directory. */
+if (!defined('XIPHE_DYNAMIC_PROXY_BASEDIR')) {
+	define('XIPHE_DYNAMIC_PROXY_BASEDIR', dirname(__FILE__).'/');
+}
 
+/* Enable autoloading. */
 include "vendor/autoload.php";
 
-$log = new KLogger('log/', KLogger::DEBUG);
+/* Initiate the logger. */
+$log = new KLogger(XIPHE_DYNAMIC_PROXY_BASEDIR.'log/', KLogger::DEBUG);
 
+/* Check if func is set and allowed. */
 if (!isset($_GET['func']) || !in_array($_GET['func'], array('get', 'set'))) {
 	$log->logNotice('Incomplete request from '.$_SERVER['REMOTE_ADDR'], $_REQUEST);
 	exit('0');
 }
 
+/* Get the current ip from file. */
+$current_ip = file_get_contents(XIPHE_DYNAMIC_PROXY_BASEDIR.'private/ip.txt');
+
 switch ($_GET['func']) {
 case 'get':
-	echo file_get_contents('private/ip.txt');
+	/* Just print the ip and die. */
+	echo $current_ip;
 	exit;
 case 'set':
-	if (!isset($_GET['name']) || !isset($_GET['pass'])) {
+
+	/* Check if required login data is passed. */
+	if (!isset($_REQUEST['name']) || !isset($_REQUEST['pass'])) {
 		$log->logNotice('Incomplete request from '.$_SERVER['REMOTE_ADDR'], $_REQUEST);
 		exit('0');
 	}
 
-	include 'private/user.php';
-	if ($_GET['name'] !== $user['name'] || $_GET['pass'] !== $user['pass']) {
+	/* Include the user-data. */ 
+	include XIPHE_DYNAMIC_PROXY_BASEDIR.'private/user.php';
+
+	/* And compare it with the passed data. */
+	if ($_REQUEST['name'] !== $user['name'] || $_REQUEST['pass'] !== $user['pass']) {
 		$log->logWarn('Unauthorized request from '.$_SERVER['REMOTE_ADDR'], $_REQUEST);
 		exit('0');
 	}
 
+	/* Get the new IP */
 	$ip = isset($_REQUEST['ip']) ? $_REQUEST['ip'] : $_SERVER['REMOTE_ADDR'];
 
-	file_put_contents('private/ip.txt', $ip);
-	$log->logInfo('Updated IP Address to '.$ip);
+	/* Write ip into file, if it's new. */
+	if ($ip !== $current_ip) {
+		file_put_contents(XIPHE_DYNAMIC_PROXY_BASEDIR.'private/ip.txt', $ip);
+		$log->logInfo('Updated IP Address to '.$ip);
+	}
 
 	exit('1');
 }

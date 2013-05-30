@@ -1,0 +1,16 @@
+{
+    "name": "xiphe/cloud",
+    "description": "PHP DynDNS for owncloud on raspberry",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hannes Diercks",
+            "email": "info@xiphe.net"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {
+        "phpproxy/phpproxy": "~0.1",
+        "infinityweb/k-logger": "dev-master"
+    }
+}

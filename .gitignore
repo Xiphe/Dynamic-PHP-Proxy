@@ -1,0 +1,9 @@
+.DS_Store
+.project
+sftp-config.json
+/vendor
+/private/*
+/log/*
+!/private/.htaccess
+!/private/*.php.sample
+!/log/.htaccess

@@ -1,0 +1,12 @@
+<?php
+
+/*
+ * Forwarding ports for http and https
+ */
+$config['http_port']  = 80;
+$config['https_port'] = 43;
+
+/*
+ * Timeout in seconds
+ */
+$config['timeout'] = 5;

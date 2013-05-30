@@ -1,0 +1,88 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+    ],
+    "hash": "2b941826a03b3d67761b87dd76339a25",
+    "packages": [
+        {
+            "name": "infinityweb/k-logger",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/InfinityWebMe/KLogger.git",
+                "reference": "9f3408715d4a1649ca4e48fe01389c17fd1b484e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/InfinityWebMe/KLogger/zipball/9f3408715d4a1649ca4e48fe01389c17fd1b484e",
+                "reference": "9f3408715d4a1649ca4e48fe01389c17fd1b484e",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "katzgrau"
+                },
+                {
+                    "name": "cwill747"
+                },
+                {
+                    "name": "InfinityWebMe",
+                    "email": "contact@infinityweb.me"
+                }
+            ],
+            "description": "A Simple Logging Class For PHP",
+            "time": "2013-01-20 15:45:15"
+        },
+        {
+            "name": "phpproxy/phpproxy",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Xiphe/php-proxy.git",
+                "reference": "v0.1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Xiphe/php-proxy/zipball/v0.1.0",
+                "reference": "v0.1.0",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "phpproxy": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT License Copyright (c) 2012 Jens Segers"
+            ],
+            "description": "A PHP proxy script with https and post support",
+            "time": "2013-05-30 08:05:24"
+        }
+    ],
+    "packages-dev": [
+
+    ],
+    "aliases": [
+
+    ],
+    "minimum-stability": "beta",
+    "stability-flags": {
+        "infinityweb/k-logger": 20
+    },
+    "platform": [
+
+    ],
+    "platform-dev": [
+
+    ]
+}

@@ -1,0 +1,8 @@
+<?php
+
+/*
+ * Authentication Data that is needed to be passed
+ * along with every set of the IP Address.
+ */
+$user['name'] = 'your_username';
+$user['pass'] = 'your_password';

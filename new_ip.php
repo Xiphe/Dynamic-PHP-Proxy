@@ -8,11 +8,9 @@ if (!defined('XIPHE_DYNAMIC_PROXY_BASEDIR')) {
 /* Enable autoloading. */
 include "vendor/autoload.php";
 
-/* Initiate the logger. */
-$log = new KLogger(XIPHE_DYNAMIC_PROXY_BASEDIR.'log/', KLogger::DEBUG);
-
 /* Check if func is set and allowed. */
 if (!isset($_GET['func']) || !in_array($_GET['func'], array('get', 'set'))) {
+	$log = new KLogger(XIPHE_DYNAMIC_PROXY_BASEDIR.'log/', KLogger::DEBUG);
 	$log->logNotice('Incomplete request from '.$_SERVER['REMOTE_ADDR'], $_REQUEST);
 	exit('0');
 }
@@ -29,6 +27,7 @@ case 'set':
 
 	/* Check if required login data is passed. */
 	if (!isset($_REQUEST['name']) || !isset($_REQUEST['pass'])) {
+		$log = new KLogger(XIPHE_DYNAMIC_PROXY_BASEDIR.'log/', KLogger::DEBUG);
 		$log->logNotice('Incomplete request from '.$_SERVER['REMOTE_ADDR'], $_REQUEST);
 		exit('0');
 	}
@@ -38,6 +37,7 @@ case 'set':
 
 	/* And compare it with the passed data. */
 	if ($_REQUEST['name'] !== $user['name'] || $_REQUEST['pass'] !== $user['pass']) {
+		$log = new KLogger(XIPHE_DYNAMIC_PROXY_BASEDIR.'log/', KLogger::DEBUG);
 		$log->logWarn('Unauthorized request from '.$_SERVER['REMOTE_ADDR'], $_REQUEST);
 		exit('0');
 	}
@@ -48,6 +48,7 @@ case 'set':
 	/* Write ip into file, if it's new. */
 	if ($ip !== $current_ip) {
 		file_put_contents(XIPHE_DYNAMIC_PROXY_BASEDIR.'private/ip.txt', $ip);
+		$log = new KLogger(XIPHE_DYNAMIC_PROXY_BASEDIR.'log/', KLogger::DEBUG);
 		$log->logInfo('Updated IP Address to '.$ip);
 	}
 
